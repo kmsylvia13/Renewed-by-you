@@ -1,44 +1,51 @@
-# [Project name]
+# Renewed By You
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A mobile-first college clothing rental and swapping prototype. Students can browse campus closet listings, arrange demo rentals or swaps, manage rentals, and share their own pieces.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/renewed-by-you run dev` — run the Expo app preview
+- `pnpm --filter @workspace/renewed-by-you run typecheck` — typecheck the mobile app
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+
+The mobile app is a local-first class MVP. Account details, listings, rental confirmations, swap requests, and extension requests use AsyncStorage; no database, payment provider, or external service is required.
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Mobile: Expo 57, Expo Router, React Native
+- Local persistence: AsyncStorage
+- Icons: Expo Vector Icons
+- Fonts: Inter
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/renewed-by-you/app/` — welcome, discovery, listing, rental, and profile screens
+- `artifacts/renewed-by-you/data/catalog.ts` — sample clothing data and shared types
+- `artifacts/renewed-by-you/state/AppStore.tsx` — app state and local persistence
+- `artifacts/renewed-by-you/constants/colors.ts` — mobile color tokens
+- `artifacts/renewed-by-you/assets/images/` — generated demo clothing photos and app icon
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Keep this MVP frontend-only; use local device storage for demo data and account state.
+- Checkout confirms a demo rental only and must not collect payment details or charge a user.
+- Swap and rental requests are prototype records stored on the device, not messages sent to another user.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Renewed By You helps college students share clothing locally instead of buying a new outfit for every occasion. The prototype includes sample apparel, date-based rental totals, swap requests, rental-extension requests, and user-created clothing listings.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Keep the visual design modern, cute, minimal, and mobile-friendly, with soft pastels and a clean layout.
+- Focus on functional class-MVP behavior rather than commercial payments or backend infrastructure.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Keep the sample catalog images in the Expo asset bundle so the demo does not depend on external image URLs.
+- Persist all user-created demo activity through the app store rather than screen-local state.
 
 ## Pointers
 
