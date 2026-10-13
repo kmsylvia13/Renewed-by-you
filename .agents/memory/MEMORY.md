@@ -1,0 +1,1 @@
+- [Dependency patch constraints](dependency-patch-constraints.md) — preserve CommonJS consumers and verify local security patches independently of version-only audits.
